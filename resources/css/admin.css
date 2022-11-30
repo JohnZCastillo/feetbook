@@ -1,0 +1,62 @@
+.admin_nav {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  height: 100%;
+}
+
+.nav__link {
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+.nav__brand {
+  text-align: center;
+  padding-block: 5px;
+  color: white;
+}
+
+.nav__link:hover {
+  background-color: var(--secondary-color);
+  color: black;
+}
+
+.container {
+  padding: 0;
+  height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  border: solid 1px grey;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+}
+
+table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.content,
+.content-container,
+table {
+  width: 100%;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+}
+
+.content {
+  padding: 20px;
+}
+
+#search {
+  width: 100%;
+  padding: 10px;
+}

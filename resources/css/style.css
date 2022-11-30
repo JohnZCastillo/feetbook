@@ -1,0 +1,185 @@
+:root {
+  --primary-color: #009879;
+  --secondary-color: #e9e9db;
+  --poppins: "Poppins", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--poppins);
+}
+
+.mb-2 {
+  margin-bottom: 5px;
+}
+
+.login-wrapper {
+  width: 90vw;
+  max-width: 450px;
+
+  margin-inline: auto;
+  margin-top: 40px;
+  border: solid 1px black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-wrapper {
+  padding: 20px 30px;
+}
+
+.field {
+  outline: none;
+  padding: 10px;
+  width: 90%;
+}
+
+#login-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.login__form > div {
+  width: max-content;
+}
+
+#login-error {
+  color: red;
+}
+
+.login__header {
+  background-color: var(--primary-color);
+  padding: 20px 10px;
+}
+
+#logo {
+  color: #0062a9;
+}
+
+.nav {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  gap: 20px;
+}
+
+.nav__logo {
+  margin-right: auto;
+  color: white;
+}
+
+.nav__link {
+  color: white;
+  text-decoration: none;
+}
+
+.main-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Singup */
+
+input {
+  height: 35px;
+}
+.singup-wrapper {
+  width: max-content;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.singup-form {
+  text-align: left;
+  width: 100vw;
+  max-width: 300px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px;
+  margin-top: 10px;
+  background-color: var(--secondary-color);
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+}
+
+#singup {
+  margin-top: 5px;
+}
+
+/* Explore Job */
+
+.inner-wrapper {
+  padding-block: 20px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  padding-inline: 10px;
+  gap: 20px;
+}
+
+.container__filter {
+  flex-basis: 20%;
+}
+
+.container__content {
+  flex-basis: 80%;
+}
+
+.search-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.filter_form {
+  padding: 10px;
+  background-color: var(--secondary-color);
+}
+
+/* general style */
+.btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.error-display {
+  color: red;
+}
+
+/* General Style */
