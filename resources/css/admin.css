@@ -19,6 +19,7 @@
 .nav__link:hover {
   background-color: var(--secondary-color);
   color: black;
+  cursor: pointer;
 }
 
 .container {
@@ -59,4 +60,8 @@ table td {
 #search {
   width: 100%;
   padding: 10px;
+}
+
+.hide {
+  display: none;
 }

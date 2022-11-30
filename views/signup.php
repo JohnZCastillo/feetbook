@@ -86,7 +86,7 @@ require_once 'autoload.php';
 
       try {
 
-        let result = await fetch("http://localhost/market-system/controller/security/RegisterUser.php", {
+        let result = await fetch("./register", {
           method: "POST",
           headers: {
             'Content-Type': "application/json"
