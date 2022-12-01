@@ -4,14 +4,17 @@ namespace db;
 
 require_once 'autoload.php';
 
+use Exception;
 use db\Database;
 use model\service\Service;
 
-class ServiceDb{
+class ServiceDb
+{
 
     // add service 
-   public static function addService(Service $service){
-       
+    public static function addService(Service $service)
+    {
+
         $id = $service->getId();
         $title = $service->getTitle();
         $description = $service->getDescription();
@@ -46,15 +49,17 @@ class ServiceDb{
 
         return $error;
     }
-    
+
 
     //return services
-   public static function getServices(){
-       
+
+    public static function getServices()
+    {
+
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT * FROM services");
+        $stmt = $conn->prepare("SELECT * FROM service");
 
         // execute prepared statement
         $stmt->execute();
@@ -62,19 +67,21 @@ class ServiceDb{
         //get result
         $result = $stmt->get_result();
 
-        $services= array();
+        $services = array();
 
         while ($data = $result->fetch_assoc()) {
-            
+
             //create service            
-            $service = new Service( $data['title'],
+            $service = new Service(
+                $data['title'],
                 $data['description'],
                 $data['price'],
                 $data['active'],
-                $data['remakrs'],
-                $data['type'],
-                $data['posterId']);
-            
+                $data['remarks'],
+                $data['type_id'],
+                $data['poster_id']
+            );
+
             //update date created base on db
             $service->setDateCreated($data['dateCreated']);
 
@@ -92,5 +99,5 @@ class ServiceDb{
         }
 
         return $services;
-   }
+    }
 }

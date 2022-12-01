@@ -5,6 +5,7 @@ require_once './autoload.php';
 use db\ServiceDb;
 use db\UserDb;
 use model\user\Role;
+use model\user\User;
 use views\components\ServiceProvider;
 
 session_start();
@@ -136,10 +137,15 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             </section>
 
 
+            <!-- Services -->
             <section class="content-container content-4 hide">
-                
-            
-                
+                <?php
+
+                foreach (ServiceDb::getServices() as $service) {
+                    echo $service->getTitle();
+                } ?>
+
+
             </section>
 
             <section class="content-container content-5 hide">
