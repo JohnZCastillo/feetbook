@@ -7,10 +7,10 @@ use model\user\User;
 class ServiceProvider
 {
 
-    public static function showDetails(User $user)
+    public static function showDetails(User $user, $class)
     {
 
-        echo "<tr>";
+        echo "<tr class= '" . $class . "'>";
         echo "<td>";
         echo $user->getId();
         echo "</td>";

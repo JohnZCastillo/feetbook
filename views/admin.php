@@ -2,9 +2,9 @@
 
 require_once './autoload.php';
 
+use db\ServiceDb;
 use db\UserDb;
 use model\user\Role;
-use model\user\User;
 use views\components\ServiceProvider;
 
 session_start();
@@ -86,7 +86,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                 foreach (UserDb::getAllUser() as $user) {
                     if ($user->getRole() !== Role::$EMPLOYEE) continue;
-                    ServiceProvider::showDetails($user);
+                    ServiceProvider::showDetails($user, '');
                 }
                 echo "</table>";
 
@@ -103,7 +103,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     </div>
                 </form>
                 <?php
-                echo "<table>";
+                echo "<table class='user-table'>";
                 echo "
                 <thead>
                 <tr>
@@ -116,17 +116,30 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     </tr>
                 </thead>";
 
+                $count = 0;
+
                 foreach (UserDb::getAllUser() as $user) {
+
                     if ($user->getRole() !== Role::$USER) continue;
-                    ServiceProvider::showDetails($user);
+                    ServiceProvider::showDetails($user, '');
+                    $count++;
                 }
+
                 echo "</table>";
 
                 ?>
+                <div>
+                    <span id="page"></span>
+                    <span id="prev">prev</span>
+                    <span id="next">next</span>
+                </div>
             </section>
 
 
             <section class="content-container content-4 hide">
+                
+            
+                
             </section>
 
             <section class="content-container content-5 hide">
@@ -168,6 +181,22 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                 }
             });
         }
+    </script>
+    <script>
+        const pagination = (table) => {
+
+            const page = [];
+            const target = document.querySelector('.' + table);
+            const rows = target.rows.length;
+
+            for (let index = 1; index <= rows / 10; index++) {
+                page.push(index);
+            }
+
+
+        }
+
+        pagination('user-table');
     </script>
 </body>
 

@@ -55,6 +55,12 @@ switch ($request) {
     case $base . 'register':
         require __DIR__ . '/controller/security/RegisterUser.php';
         break;
+    case $base . 'add-service':
+        require __DIR__ . '/controller/service/AddService.php';
+        break;
+     case $base . 'add-type':
+        require __DIR__ . '/controller/type/AddType.php';
+        break;
     default:
         http_response_code(404);
         require __DIR__ . '/views/error.php';
