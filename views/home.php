@@ -2,8 +2,6 @@
 
 namespace views;
 
-use Exception;
-use db\ProductDb;
 use views\components\Header;
 use views\components\MainNav;
 
@@ -28,12 +26,19 @@ session_start();
     <title>Market Sytem</title>
 </head>
 
-<!-- Get Main navigation  -->
-<?php MainNav::nav(); ?>
 
 
 <body>
+    <div class="main-wrapper">
+        <!-- Get Main navigation  -->
+        <?php MainNav::nav(); ?>
 
+        <!-- Jobs -->
+        <section>
+
+        </section>
+
+    </div>
 </body>
 
 </html>

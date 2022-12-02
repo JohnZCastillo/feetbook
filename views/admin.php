@@ -1,11 +1,13 @@
 <?php
 
-require_once './autoload.php';
+require_once 'autoload.php';
 
-use db\ServiceDb;
+use db\TypeDb;
 use db\UserDb;
+use db\ServiceDb;
 use model\user\Role;
 use model\user\User;
+use views\components\TableLayout;
 use views\components\ServiceProvider;
 
 session_start();
@@ -61,7 +63,6 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             <section class="content-container content-1 hide">
             </section>
 
-
             <!-- Customers -->
             <section class="content-container content-2 hide">
                 <h2>Customers</h2>
@@ -72,24 +73,32 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     </div>
                 </form>
                 <?php
-                echo "<table>";
-                echo "
-                <thead>
-                <tr>
-                          <th>Id</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Birthday</th>
-                          <th>status</th>
-                          <th>action</th>
-                    </tr>
-                </thead>";
+                $header = ["Id", "Name", "Email", "Birthday", "Status", "Action"];
+
+                $users = array();
 
                 foreach (UserDb::getAllUser() as $user) {
+
                     if ($user->getRole() !== Role::$EMPLOYEE) continue;
-                    ServiceProvider::showDetails($user, '');
+
+                    $data = array();
+
+                    $action = "<button>active</button><button>delete</button>";
+
+                    array_push($data,  $user->getId());
+                    array_push($data,  $user->getName());
+                    array_push($data,  $user->getEmail());
+                    array_push($data,  $user->getBirthday());
+
+                    $status = $user->isValid()  ? "active" : "deactivated";
+
+                    array_push($data,  $status);
+                    array_push($data,  $action);
+
+                    array_push($users,  $data);
                 }
-                echo "</table>";
+
+                TableLayout::setLayout($header, $users);
 
                 ?>
             </section>
@@ -104,52 +113,107 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     </div>
                 </form>
                 <?php
-                echo "<table class='user-table'>";
-                echo "
-                <thead>
-                <tr>
-                          <th>Id</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Birthday</th>
-                          <th>status</th>
-                          <th>action</th>
-                    </tr>
-                </thead>";
 
-                $count = 0;
+                $header = ["Id", "Name", "Email", "Birthday", "Status", "Action"];
+
+                $users = array();
 
                 foreach (UserDb::getAllUser() as $user) {
 
                     if ($user->getRole() !== Role::$USER) continue;
-                    ServiceProvider::showDetails($user, '');
-                    $count++;
+
+                    $data = array();
+
+                    $action = "<button>active</button><button>delete</button>";
+
+                    array_push($data,  $user->getId());
+                    array_push($data,  $user->getName());
+                    array_push($data,  $user->getEmail());
+                    array_push($data,  $user->getBirthday());
+
+                    $status = $user->isValid()  ? "active" : "deactivated";
+
+                    array_push($data,  $status);
+                    array_push($data,  $action);
+
+                    array_push($users,  $data);
                 }
 
-                echo "</table>";
+                TableLayout::setLayout($header, $users);
 
                 ?>
-                <div>
-                    <span id="page"></span>
-                    <span id="prev">prev</span>
-                    <span id="next">next</span>
-                </div>
             </section>
 
-
-            <!-- Services -->
+            <!--  Services Category -->
             <section class="content-container content-4 hide">
                 <?php
 
-                foreach (ServiceDb::getServices() as $service) {
-                    echo $service->getTitle();
-                } ?>
+                echo "<h2>Services Category</h2>";
+                $header = ["Id", "Title", "Description", "Created", "Status", "Action"];
 
+                $services = array();
+
+                foreach (TypeDb::getTypes() as $type) {
+
+                    $data = array();
+
+                    $action = "<button>active</button><button>delete</button>";
+
+                    array_push($data,  $type->getId());
+                    array_push($data,  $type->getTitle());
+                    array_push($data,  $type->getDescription());
+                    array_push($data,  $type->getDateCreated());
+                    $status = $type->getActive()  ? "active" : "deactivated";
+
+                    array_push($data,  $status);
+                    array_push($data,  $action);
+
+                    array_push($services,  $data);
+                }
+
+                TableLayout::setLayout($header, $services);
+
+                ?>
 
             </section>
 
+            <!-- Services -->
             <section class="content-container content-5 hide">
+                <?php
 
+                echo "<h2>Services</h2>";
+
+                $header = ["Id", "Title", "Description", "Price", "Active", "Remarks", "Date Created", "Category", "Poster", "Action"];
+
+                $services = array();
+
+                foreach (ServiceDb::getServices() as $service) {
+
+                    $data = array();
+
+                    $action = "<button>active</button><button>delete</button>";
+
+                    array_push($data,  $service->getId());
+                    array_push($data,  $service->getTitle());
+                    array_push($data,  $service->getDescription());
+                    array_push($data,  $service->getPrice());
+
+                    $status = $type->getActive()  ? "active" : "deactivated";
+                    array_push($data,  $status);
+
+                    array_push($data,  $service->getRemarks());
+                    array_push($data,  $service->getDateCreated());
+                    array_push($data,  $service->getType());
+                    array_push($data,  $service->getPosterId());
+
+                    array_push($data,  $action);
+
+                    array_push($services,  $data);
+                }
+
+                TableLayout::setLayout($header, $services);
+
+                ?>
             </section>
         </div>
     </section>
@@ -187,23 +251,12 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                 }
             });
         }
-    </script>
-    <script>
-        const pagination = (table) => {
 
-            const page = [];
-            const target = document.querySelector('.' + table);
-            const rows = target.rows.length;
-
-            for (let index = 1; index <= rows / 10; index++) {
-                page.push(index);
-            }
-
-
+        const activateType = async (id) => {
+            // fetch('./activate-type') {}
         }
-
-        pagination('user-table');
     </script>
+
 </body>
 
 </html>

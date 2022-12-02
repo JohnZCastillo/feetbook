@@ -14,7 +14,7 @@ class MainNav
             <br>
             <span>Market System</span>
         </div>
-        <a href='' class='nav__link'>Explore</a>
+        <a href='./explore' class='nav__link'>Explore</a>
         <a href='./login' class='nav__link'>Login</a>
         <a href='./signup' class='nav__link'>Singup</a>
         <a href='./findjob' class='nav__link'>Find a Job</a>

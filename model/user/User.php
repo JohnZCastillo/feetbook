@@ -26,9 +26,9 @@ class User
         $this->id = Util::generateId();
         $this->name = $name;
         $this->password = $password;
-        $this->role = Role::$USER;
+        $this->role = Role::$VISITOR;
         $this->email = $email;
-        $this->valid = false;
+        $this->valid = 0;
     }
 
     public function getId()

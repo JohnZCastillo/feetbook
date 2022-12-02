@@ -9,52 +9,62 @@ class Type
     private $description;
     private $dateCreated;
     private $active;
-    
-    public function __construct($title, $description) {
+
+    public function __construct($title, $description)
+    {
         $this->title = $title;
         $this->description = $description;
-        $this->dateCreated = date('Y-m-d H:i:s') ;
+        $this->dateCreated = date('Y-m-d H:i:s');
         $this->active = 0;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function getDateCreated() {
+    public function getDateCreated()
+    {
         return $this->dateCreated;
     }
 
-    public function getActive() {
+    public function getActive()
+    {
         return $this->active;
     }
 
-    public function setId($id): void {
+    public function setId($id): void
+    {
         $this->id = $id;
     }
 
-    public function setTitle($title): void {
+    public function setTitle($title): void
+    {
         $this->title = $title;
     }
 
-    public function setDescription($description): void {
+    public function setDescription($description): void
+    {
         $this->description = $description;
     }
 
-    public function setDateCreated($dateCreated): void {
+    public function setDateCreated($dateCreated): void
+    {
         $this->dateCreated = $dateCreated;
     }
 
-    public function setActive($active): void {
+    public function setActive($active): void
+    {
         $this->active = $active;
     }
-
 }

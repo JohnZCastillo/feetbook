@@ -31,18 +31,19 @@ class UserDb
         $password =  $user->getPassword();
         $birthday =  $user->getBirthday();
         $role =  $user->getRole();
-
+        $valid = $user->isValid();
         $connection = Database::open();
 
-        $stmt = $connection->prepare("INSERT INTO user values(?,?,?,?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO user values(?,?,?,?,?,?,?)");
 
         $stmt->bind_param(
-            "ssssss",
+            "sssssds",
             $id,
             $name,
             $email,
             $password,
             $birthday,
+            $valid,
             $role
         );
 
@@ -55,6 +56,29 @@ class UserDb
         return $error;
     }
 
+    public static function registerRole($userId, $userRole)
+    {
+
+        $id = $userId;
+        $role = mb_strtoupper($userRole);
+        $connection = Database::open();
+
+        $stmt = $connection->prepare("UPDATE user SET ROLE = ? WHERE id = ?");
+
+        $stmt->bind_param(
+            "ss",
+            $role,
+            $id
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
 
     public static function getUserByEmail($email)
     {

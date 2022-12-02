@@ -52,7 +52,6 @@ class ServiceDb
 
 
     //return services
-
     public static function getServices()
     {
 

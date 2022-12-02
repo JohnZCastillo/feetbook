@@ -16,6 +16,9 @@ switch ($request) {
     case $base:
         require __DIR__ . '/views/home.php';
         break;
+    case $base . 'explore':
+        require __DIR__ . '/views/home.php';
+        break;
     case $base . 'about':
         require __DIR__ . '/views/about.php';
         break;
@@ -46,6 +49,9 @@ switch ($request) {
     case $base . 'admin':
         require __DIR__ . '/views/admin.php';
         break;
+    case $base . 'visitor':
+        require __DIR__ . '/views/visitor.php';
+        break;
     case $base . 'logout':
         require __DIR__ . '/controller/security/Logout.php';
         break;
@@ -58,8 +64,11 @@ switch ($request) {
     case $base . 'add-service':
         require __DIR__ . '/controller/service/AddService.php';
         break;
-     case $base . 'add-type':
+    case $base . 'add-type':
         require __DIR__ . '/controller/type/AddType.php';
+        break;
+    case $base . 'update-role':
+        require __DIR__ . '/controller/user/UpdateRole.php';
         break;
     default:
         http_response_code(404);
