@@ -106,7 +106,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             <!-- Service Providers -->
             <section class="content-container content-3">
                 <h2>Service provider</h2>
-                <form action="">
+                <form>
                     <div class="form-group">
                         <label for="search">Search Name</label>
                         <input type="text" name="search" id="search">
@@ -124,7 +124,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                     $data = array();
 
-                    $action = "<button>active</button><button>delete</button>";
+                    $action = "<button onclick=activate('" . $user->getId() . "')>active</button><button onclick=deleteUser('" . $user->getId() . "')>delete</button>";
 
                     array_push($data,  $user->getId());
                     array_push($data,  $user->getName());
@@ -146,9 +146,14 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
             <!--  Services Category -->
             <section class="content-container content-4 hide">
-                <?php
 
-                echo "<h2>Services Category</h2>";
+                <h2>Services Category</h2>
+
+                <div class="buttons">
+                    <button class="btn" id="btn-category">New Category</button>
+                </div>
+
+                <?php
                 $header = ["Id", "Title", "Description", "Created", "Status", "Action"];
 
                 $services = array();
@@ -215,10 +220,30 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                 ?>
             </section>
+
+            <!-- form for services -->
+            <form class="popup" id="new-category">
+                <h2>New Service</h2>
+                <div class="form-group">
+                    <label for="name">Title</label>
+                    <input type="text" id="category-title">
+                </div>
+                <div class="form-group">
+                    <label for="name">Description</label>
+                    <input type="text" id="category-description">
+                </div>
+                <div class="mt-2">
+                    <button class="btn" type="submit">Add</button>
+                    <button class="btn">Cancel</button>
+                </div>
+            </form>
         </div>
     </section>
 
     <script>
+        const newCategory = document.querySelector('#new-category');
+        const btnAddCategory = document.querySelector("#btn-category");
+
         const btn1 = document.querySelector('.btn-1');
         const btn2 = document.querySelector('.btn-2');
         const btn3 = document.querySelector('.btn-3');
@@ -247,15 +272,59 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             contents.forEach(content => {
                 if (!content.classList.contains('hide')) {
                     content.classList.add('hide');
-                    console.log('hiding!');
                 }
             });
         }
 
-        const activateType = async (id) => {
-            // fetch('./activate-type') {}
+        btnAddCategory.addEventListener('click', () => {
+            newCategory.classList.remove('hide');
+        })
+
+        newCategory.addEventListener('submit', async (event) => {
+
+            event.preventDefault();
+
+            const title = document.querySelector("#category-title");
+            const description = document.querySelector("#category-description");
+
+            try {
+                let result = await fetch("./add-type", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify({
+                        title: title.value,
+                        description: description.value,
+                    })
+                });
+
+                const status = result.ok;
+                result = await result.json();
+
+                if (!status) throw new Error(result.message);
+
+                alert("Added");
+
+                newCategory.classList.add('hide');
+
+            } catch (error) {
+                alert(error.message);
+            }
+
+        })
+
+
+        //delete user
+        const deleteUser = (id) => {
+            console.log(id);
+        }
+
+        const search = (name) => {
+            console.log(name);
         }
     </script>
+
 
 </body>
 

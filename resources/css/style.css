@@ -182,4 +182,11 @@ input {
   color: red;
 }
 
+.mt-2 {
+  margin-top: 10px;
+}
+
+input {
+  padding: 5px 10px;
+}
 /* General Style */

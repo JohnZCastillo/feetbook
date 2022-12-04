@@ -65,3 +65,35 @@ table td {
 .hide {
   display: none;
 }
+.btn {
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.popup {
+  width: 300px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 100px;
+  z-index: 9999;
+  padding: 20px;
+  background-color: white;
+  border: solid 1px var(--primary-color);
+}
+
+.form-group {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form-group > * {
+  width: 100%;
+}
