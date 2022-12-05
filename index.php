@@ -64,6 +64,9 @@ switch ($request) {
     case $base . 'add-service':
         require __DIR__ . '/controller/service/AddService.php';
         break;
+    case $base . 'employeer':
+        require __DIR__ . '/views/employeer.php';
+        break;
     case $base . 'add-type':
         require __DIR__ . '/controller/type/AddType.php';
         break;

@@ -71,7 +71,7 @@ class TypeDb
             $type->setId($data['id']);
 
             // update active
-            $type->setId($data['active']);
+            $type->setActive($data['active']);
 
             array_push($types, $type);
         }

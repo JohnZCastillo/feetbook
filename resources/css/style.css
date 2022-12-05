@@ -190,3 +190,36 @@ input {
   padding: 5px 10px;
 }
 /* General Style */
+
+/* Pagination */
+.pagination-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-block: 10px;
+}
+.pagination {
+  padding: 5px 10px;
+  border: solid 1px black;
+  cursor: pointer;
+}
+
+.pagination:nth-child(1) {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  border-left: solid 1px black;
+  border-right: none;
+}
+.pagination:last-child {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  border-right: solid 1px black;
+  border-left: none;
+}
+.pagination:nth-child(2) {
+  border: solid 1px black;
+}
+
+.pagination:visited {
+  background-color: #0062a9;
+}

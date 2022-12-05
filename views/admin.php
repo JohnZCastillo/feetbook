@@ -98,7 +98,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     array_push($users,  $data);
                 }
 
-                TableLayout::setLayout($header, $users);
+                TableLayout::setLayout($header, $users, "customers-table");
 
                 ?>
             </section>
@@ -139,7 +139,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     array_push($users,  $data);
                 }
 
-                TableLayout::setLayout($header, $users);
+                TableLayout::setLayout($header, $users, 'provider-table');
 
                 ?>
             </section>
@@ -176,7 +176,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     array_push($services,  $data);
                 }
 
-                TableLayout::setLayout($header, $services);
+                TableLayout::setLayout($header, $services, "category-table");
 
                 ?>
 
@@ -216,13 +216,13 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                     array_push($services,  $data);
                 }
 
-                TableLayout::setLayout($header, $services);
+                TableLayout::setLayout($header, $services, 'services-table');
 
                 ?>
             </section>
 
             <!-- form for services -->
-            <form class="popup" id="new-category">
+            <form class="hide popup" id="new-category">
                 <h2>New Service</h2>
                 <div class="form-group">
                     <label for="name">Title</label>
@@ -234,7 +234,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                 </div>
                 <div class="mt-2">
                     <button class="btn" type="submit">Add</button>
-                    <button class="btn">Cancel</button>
+                    <span class="btn" onclick="hideElement('new-category')">Cancel</span>
                 </div>
             </form>
         </div>
@@ -280,6 +280,11 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             newCategory.classList.remove('hide');
         })
 
+        //hide element base on id
+        const hideElement = (id) => {
+            document.querySelector('#' + id).classList.add('hide');
+        }
+
         newCategory.addEventListener('submit', async (event) => {
 
             event.preventDefault();
@@ -314,7 +319,6 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
         })
 
-
         //delete user
         const deleteUser = (id) => {
             console.log(id);
@@ -323,9 +327,29 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
         const search = (name) => {
             console.log(name);
         }
+
+        const showPagination = (id, page) => {
+
+            const table = document.querySelector('#' + id);
+
+            console.log(id + '-page-' + page);
+
+            let index = 0;
+
+            for (let row of table.rows) {
+
+                //escape header
+                if (index++ == 0) continue;
+
+                if (row.classList.contains(id + '-page-' + page)) {
+                    row.classList.remove('hide');
+                } else {
+                    row.classList.add('hide');
+                }
+            }
+
+        }
     </script>
-
-
 </body>
 
 </html>

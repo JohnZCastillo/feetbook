@@ -109,7 +109,14 @@ require_once 'autoload.php';
           throw new Error(result.message);
         }
 
-        console.log(result.message);
+        // clear input if signup success
+        name.value = "";
+        email.value = "";
+        password.value = "";
+        birthday.value = "";
+
+        alert("Registration Success!");
+
       } catch (error) {
         errorDisplay.innerHTML = error.message;
         console.log(error.message);

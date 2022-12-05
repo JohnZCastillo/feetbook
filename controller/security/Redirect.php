@@ -40,6 +40,14 @@ if (isset($_SESSION['userRole'])) {
 
             break;
 
+        case Role::$EMPLOYEE:
+
+            header('Location: /market-system/employeer');
+
+            die();
+
+            break;
+
         case Role::$USER:
 
             header('Location: /market-system/user');
