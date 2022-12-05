@@ -28,8 +28,6 @@ if (!$_SESSION["isLogin"]) {
 if ($_SESSION['userRole'] !== Role::$ADMIN) {
     header('Location: ./redirect');
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,17 +59,12 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
         <div class="content">
 
             <section class="content-container content-1 hide">
+
             </section>
 
             <!-- Customers -->
             <section class="content-container content-2 hide">
                 <h2>Customers</h2>
-                <form action="">
-                    <div class="form-group">
-                        <label for="search">Search Name</label>
-                        <input type="text" name="search" id="search">
-                    </div>
-                </form>
                 <?php
                 $header = ["Id", "Name", "Email", "Birthday", "Status", "Action"];
 
@@ -106,12 +99,6 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
             <!-- Service Providers -->
             <section class="content-container content-3">
                 <h2>Service provider</h2>
-                <form>
-                    <div class="form-group">
-                        <label for="search">Search Name</label>
-                        <input type="text" name="search" id="search">
-                    </div>
-                </form>
                 <?php
 
                 $header = ["Id", "Name", "Email", "Birthday", "Status", "Action"];
@@ -162,7 +149,9 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                     $data = array();
 
-                    $action = "<button>active</button><button>delete</button>";
+                    $id = $type->getId();
+
+                    $action = "<button onclick=\"editService($id)\">edit</button><button>delete</button>";
 
                     array_push($data,  $type->getId());
                     array_push($data,  $type->getTitle());
@@ -188,7 +177,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                 echo "<h2>Services</h2>";
 
-                $header = ["Id", "Title", "Description", "Price", "Active", "Remarks", "Date Created", "Category", "Poster", "Action"];
+                $header = ["Id", "Title", "Description", "Price", "Date Created", "Category", "Poster", "Action"];
 
                 $services = array();
 
@@ -196,20 +185,15 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
 
                     $data = array();
 
-                    $action = "<button>active</button><button>delete</button>";
+                    $action = "<button>delete</button>";
 
                     array_push($data,  $service->getId());
                     array_push($data,  $service->getTitle());
                     array_push($data,  $service->getDescription());
                     array_push($data,  $service->getPrice());
-
-                    $status = $type->getActive()  ? "active" : "deactivated";
-                    array_push($data,  $status);
-
-                    array_push($data,  $service->getRemarks());
                     array_push($data,  $service->getDateCreated());
-                    array_push($data,  $service->getType());
-                    array_push($data,  $service->getPosterId());
+                    array_push($data, TypeDb::getTypeById($service->getType())->getTitle());
+                    array_push($data, UserDb::getUserById($service->getPosterId())->getName());
 
                     array_push($data,  $action);
 
@@ -348,6 +332,10 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
                 }
             }
 
+        }
+
+        const editService = (id) => {
+            console.log(id);
         }
     </script>
 </body>

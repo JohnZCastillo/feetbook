@@ -123,6 +123,50 @@ class UserDb
         return $user;
     }
 
+    public static function getUserById($id)
+    {
+
+        // open database connection
+        $conn = Database::open();
+
+        $stmt = $conn->prepare("SELECT id,username,email,password,role,birthday FROM user where id = ?");
+
+        // set the ?'s mark data to parameter's data
+        $stmt->bind_param("s", $id);
+
+        // execute prepared statement
+        $stmt->execute();
+
+        //get result
+        $result = $stmt->get_result();
+
+        // store result in array
+        $data = $result->fetch_assoc();
+
+        // throw an exception data is null that means username is not present in db
+        if ($data == null) {
+            Database::close($conn);
+            throw new Exception('Username not found | Invalid Connection');
+        }
+
+        Database::close($conn);
+
+        //crete user base on collected data | more like format 
+        $user = new User($data['username'], $data['password'], $data['email'],);
+
+        // update id base on db
+        $user->setId($data['id']);
+
+        // update role base on db 
+        $user->setRole($data['role']);
+
+        //update birthday
+        $user->setBirthday($data['birthday']);
+
+        return $user;
+    }
+
+
     public static function getAllUser()
     {
 

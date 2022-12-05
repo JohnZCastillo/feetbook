@@ -61,6 +61,9 @@ switch ($request) {
     case $base . 'register':
         require __DIR__ . '/controller/security/RegisterUser.php';
         break;
+    case $base . 'dashboard':
+        require __DIR__ . '/views/admin/dashboard.php';
+        break;
     case $base . 'add-service':
         require __DIR__ . '/controller/service/AddService.php';
         break;

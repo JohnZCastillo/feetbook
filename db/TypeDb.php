@@ -85,4 +85,52 @@ class TypeDb
 
         return $types;
     }
+
+    public static function getTypeById($id)
+    {
+
+        // open database connection
+        $conn = Database::open();
+
+        $stmt = $conn->prepare("SELECT * FROM type  where id = ?");
+
+        $stmt->bind_param(
+            "s",
+            $id
+        );
+
+        // execute prepared statement
+        $stmt->execute();
+
+        //get result
+        $result = $stmt->get_result();
+
+        $types = array();
+
+        $data = $result->fetch_assoc();
+
+        //create type            
+        $type = new Type(
+            $data['title'],
+            $data['description']
+        );
+
+        //update date created base on db
+        $type->setDateCreated($data['dateCreated']);
+
+        // update id baso on db
+        $type->setId($data['id']);
+
+        // update active
+        $type->setActive($data['active']);
+
+        Database::close($conn);
+
+        // throw an exception data is null that means username is not present in db
+        if ($type == null) {
+            throw new Exception('Type Not found');
+        }
+
+        return $type;
+    }
 }
