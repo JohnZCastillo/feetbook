@@ -8,10 +8,10 @@ class Config
 {
 
     // local development
-    private static $servername = "127.0.0.1:3306";
+    private static $servername = "127.0.0.1:3308";
     private static $username = "root";
-    private static $password = "123456";
-    private static $database = "finals";
+    private static $password = "";
+    private static $database = "market";
 
     //configuration
     // private static $servername = "sql301.epizy.com:3306";
