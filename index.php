@@ -47,7 +47,7 @@ switch ($request) {
         require __DIR__ . '/views/userpanel.php';
         break;
     case $base . 'admin':
-        require __DIR__ . '/views/admin.php';
+        require __DIR__ . '/views/admin/dashboard.php';
         break;
     case $base . 'visitor':
         require __DIR__ . '/views/visitor.php';
@@ -72,6 +72,21 @@ switch ($request) {
         break;
     case $base . 'add-type':
         require __DIR__ . '/controller/type/AddType.php';
+        break;
+    case $base . 'services':
+        require __DIR__ . '/views/admin/services.php';
+        break;
+    case $base . 'dashboard':
+        require __DIR__ . '/views/admin/dashboard.php';
+        break;
+    case $base . 'customers':
+        require __DIR__ . '/views/admin/customers.php';
+        break;
+    case $base . 'category':
+        require __DIR__ . '/views/admin/service-category.php';
+        break;
+    case $base . 'provider':
+        require __DIR__ . '/views/admin/service-provider.php';
         break;
     case $base . 'update-role':
         require __DIR__ . '/controller/user/UpdateRole.php';

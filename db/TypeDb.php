@@ -80,7 +80,7 @@ class TypeDb
 
         // throw an exception data is null that means username is not present in db
         if ($types == null) {
-            throw new Exception('Type Not found');
+            throw new Exception('No types yet');
         }
 
         return $types;

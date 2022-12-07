@@ -5,6 +5,7 @@ namespace views;
 use db\UserDb;
 use db\ServiceDb;
 use db\TypeDb;
+use Exception;
 use views\components\Header;
 use views\components\MainNav;
 use views\components\TableLayout;
@@ -42,24 +43,29 @@ session_start();
 
             <?php
 
-            foreach (ServiceDb::getServices() as $service) {
+            try {
+                foreach (ServiceDb::getServices() as $service) {
 
-                echo "<div class='posted-job'>";
+                    echo "<div class='posted-job'>";
 
-                $type = TypeDb::getTypeById($service->getType())->getTitle();
-                $title = $service->getTitle();
-                $description = $service->getDescription();
-                $date = $service->getDateCreated();
-                $posterName = UserDb::getUserById($service->getPosterId())->getName();
+                    $type = TypeDb::getTypeById($service->getType())->getTitle();
+                    $title = $service->getTitle();
+                    $description = $service->getDescription();
+                    $date = $service->getDateCreated();
+                    $posterName = UserDb::getUserById($service->getPosterId())->getName();
 
-                echo "<span class='job-type'>$type</span>";
-                echo "<span class='job-title'>$title</span>";
-                echo "<span class='job-description'>$description</span>";
-                echo "<span class='job-poster'>$posterName</span>";
-                echo "<span class='job-date'>$date</span>";
+                    echo "<span class='job-type'>$type</span>";
+                    echo "<span class='job-title'>$title</span>";
+                    echo "<span class='job-description'>$description</span>";
+                    echo "<span class='job-poster'>$posterName</span>";
+                    echo "<span class='job-date'>$date</span>";
 
-                echo "</div>";
+                    echo "</div>";
+                }
+            } catch (Exception $e) {
+                echo $e->getMessage();
             }
+
 
             ?>
         </section>

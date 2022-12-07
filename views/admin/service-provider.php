@@ -6,15 +6,15 @@ require_once 'autoload.php';
 
 use db\TypeDb;
 use db\UserDb;
-use db\ServiceDb;
 use Exception;
+use db\ServiceDb;
 use model\user\Role;
 use model\user\User;
 use views\components\SideNav;
 use views\components\TableLayout;
-use views\components\ServiceProvider;
 
 use function controller\type\addType;
+use views\components\ServiceProvider;
 
 session_start();
 
@@ -44,7 +44,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/css/admin.css">
-    <title>Dashboard</title>
+    <title>Serivce Provider</title>
 </head>
 
 <body>
@@ -52,40 +52,49 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
     <div class="container">
         <!-- pull side nav -->
         <?php SideNav::getSideNav() ?>
-        <div class="content">
-            <?php
 
+        <div class="content">
+            <h2>Service provider</h2>
+
+
+            <?php
             try {
-                $userCount = 0;
-                $employeerCount = 0;
-                $jobs = sizeof(ServiceDb::getServices());
-                $category = sizeof(TypeDb::getTypes());
+                $header = ["Id", "Name", "Email", "Birthday", "Status", "Action"];
+
+                $users = array();
 
                 foreach (UserDb::getAllUser() as $user) {
 
-                    if ($user->getRole() == Role::$USER) {
-                        $userCount++;
-                    }
+                    if ($user->getRole() !== Role::$USER) continue;
 
-                    if ($user->getRole() == Role::$EMPLOYEE) {
-                        $employeerCount++;
-                    }
+                    $data = array();
+
+                    $action = "<button onclick=activate('" . $user->getId() . "')>active</button><button onclick=deleteUser('" . $user->getId() . "')>delete</button>";
+
+                    array_push($data,  $user->getId());
+                    array_push($data,  $user->getName());
+                    array_push($data,  $user->getEmail());
+                    array_push($data,  $user->getBirthday());
+
+                    $status = $user->isValid()  ? "active" : "deactivated";
+
+                    array_push($data,  $status);
+                    array_push($data,  $action);
+
+                    array_push($users,  $data);
                 }
 
-                echo "<div class='box-wrapper'>";
-                echo "<div class='box'>$userCount</div>";
-                echo "<div class='box'>$employeerCount</div>";
-                echo "<div class='box'>$jobs</div>";
-                echo "<div class='box'>$category</div>";
-                echo "</div>";
+                TableLayout::setLayout($header, $users, 'provider-table');
             } catch (Exception $e) {
-                echo "No data available";
+                echo "No services provider yet";
             }
+
 
             ?>
         </div>
     </div>
     <script src="./resources/js/pagination.js"></script>
+    <script src="./resources/js/category.js"></script>
 
 </body>
 

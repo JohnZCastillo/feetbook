@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Dec 07, 2022 at 02:39 PM
+-- Generation Time: Dec 07, 2022 at 05:23 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -53,6 +53,24 @@ CREATE TABLE `type` (
   `active` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `type`
+--
+
+INSERT INTO `type` (`id`, `title`, `description`, `dateCreated`, `active`) VALUES
+(1, 'john', 'james', '2022-12-07', b'0'),
+(2, 'saf', 'asf', '2022-12-07', b'0'),
+(3, 'john', 'saf', '2022-12-07', b'0'),
+(4, 'john', 'safsfsaf', '2022-12-07', b'0'),
+(5, 'saf', 'asfd', '2022-12-07', b'0'),
+(6, 'd', 'saf', '2022-12-07', b'0'),
+(7, 'test', 'test', '2022-12-07', b'0'),
+(8, 'wow', 'ha', '2022-12-07', b'0'),
+(9, 'dfsa', 'safsf', '2022-12-07', b'0'),
+(10, 'wow', 'ha', '2022-12-07', b'0'),
+(11, 'we', 'we', '2022-12-07', b'0'),
+(12, 'he', 'he', '2022-12-07', b'0');
+
 -- --------------------------------------------------------
 
 --
@@ -75,7 +93,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `birthday`, `verified`, `role`) VALUES
 ('81601', 'sherom', 'sherom@gmail.com', 'sherom', '2022-12-15', b'0', 'USER'),
-('95172', 'john', 'john@gmail.com', 'john', '2022-12-13', b'0', 'EMPLOYEE');
+('95172', 'john', 'john@gmail.com', 'john', '2022-12-13', b'0', 'EMPLOYEE'),
+('admin', 'admin', 'admin', 'admin', '0000-00-00', b'1', 'ADMIN');
 
 --
 -- Indexes for dumped tables
@@ -117,7 +136,7 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

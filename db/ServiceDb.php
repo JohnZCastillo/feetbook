@@ -94,7 +94,7 @@ class ServiceDb
 
         // throw an exception data is null that means username is not present in db
         if ($services == null) {
-            throw new Exception('Username not found | Invalid Connection');
+            throw new Exception('No services yet');
         }
 
         return $services;

@@ -7,7 +7,6 @@ require_once 'autoload.php';
 use db\TypeDb;
 use db\UserDb;
 use db\ServiceDb;
-use Exception;
 use model\user\Role;
 use model\user\User;
 use views\components\SideNav;
@@ -44,7 +43,7 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/css/admin.css">
-    <title>Dashboard</title>
+    <title>Services</title>
 </head>
 
 <body>
@@ -53,34 +52,38 @@ if ($_SESSION['userRole'] !== Role::$ADMIN) {
         <!-- pull side nav -->
         <?php SideNav::getSideNav() ?>
         <div class="content">
+            <h2>Services</h2>
             <?php
 
             try {
-                $userCount = 0;
-                $employeerCount = 0;
-                $jobs = sizeof(ServiceDb::getServices());
-                $category = sizeof(TypeDb::getTypes());
+                $header = ["Id", "Title", "Description", "Price", "Date Created", "Category", "Poster", "Action"];
 
-                foreach (UserDb::getAllUser() as $user) {
+                $services = array();
 
-                    if ($user->getRole() == Role::$USER) {
-                        $userCount++;
-                    }
+                foreach (ServiceDb::getServices() as $service) {
 
-                    if ($user->getRole() == Role::$EMPLOYEE) {
-                        $employeerCount++;
-                    }
+                    $data = array();
+
+                    $action = "<button>delete</button>";
+
+                    array_push($data,  $service->getId());
+                    array_push($data,  $service->getTitle());
+                    array_push($data,  $service->getDescription());
+                    array_push($data,  $service->getPrice());
+                    array_push($data,  $service->getDateCreated());
+                    array_push($data, TypeDb::getTypeById($service->getType())->getTitle());
+                    array_push($data, UserDb::getUserById($service->getPosterId())->getName());
+
+                    array_push($data,  $action);
+
+                    array_push($services,  $data);
                 }
 
-                echo "<div class='box-wrapper'>";
-                echo "<div class='box'>$userCount</div>";
-                echo "<div class='box'>$employeerCount</div>";
-                echo "<div class='box'>$jobs</div>";
-                echo "<div class='box'>$category</div>";
-                echo "</div>";
-            } catch (Exception $e) {
-                echo "No data available";
+                TableLayout::setLayout($header, $services, 'services-table');
+            } catch (\Throwable $th) {
+                echo "No services yet";
             }
+
 
             ?>
         </div>

@@ -37,14 +37,19 @@ require_once 'autoload.php';
                 <form action="" class="filter_form">
                     <h2>Type of work</h2>
                     <?php
-                    foreach (TypeDb::getTypes() as $type) {
-                        $id = $type->getId();
-                        $title = $type->getTitle();
-                        echo "<div class=\"form-group\">";
-                        echo "<input type='checkbox'  name='$title' value='$id'>";
-                        echo "<label>$title</label>";
-                        echo "</div>";
+                    try {
+                        foreach (TypeDb::getTypes() as $type) {
+                            $id = $type->getId();
+                            $title = $type->getTitle();
+                            echo "<div class=\"form-group\">";
+                            echo "<input type='checkbox'  name='$title' value='$id'>";
+                            echo "<label>$title</label>";
+                            echo "</div>";
+                        }
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
                     }
+
 
                     ?>
                 </form>
