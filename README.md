@@ -8,6 +8,8 @@
 ## Db setup
 - start xampp
 - visit http://localhost/phpmyadmin
+- create a database name market
+- click the market icom from the sidepanel (make user na click)
 - click import from the upper tab 
 - import market.sql
 - change db/config settings according to your db connection
