@@ -94,14 +94,7 @@ session_start();
             </table>
           </div>
         </div>
-        <div>
-          <p class="project">Projects</p>
-          <div style="padding: 2em; line-height: 2em">
-            <p>Web Design</p>
-            <p>Web Markup</p>
-            <p>One Piece</p>
-          </div>
-        </div>
+        <div></div>
       </div>
     </div>
   </body>
