@@ -12,5 +12,5 @@
 - click the market icom from the sidepanel (make user na click)
 - click import from the upper tab 
 - import feetbook.sql
-- change db/config settings according to your db connection
+- change db/config settings according to your db connection (port 3308 default port ko)
 

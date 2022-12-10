@@ -22,8 +22,8 @@ switch ($request) {
     case $base . 'about':
         require __DIR__ . '/views/about.php';
         break;
-    case $base . 'products':
-        require __DIR__ . '/views/products.php';
+    case $base . 'user':
+        require __DIR__ . '/views/user.php';
         break;
     case $base . 'product':
         require __DIR__ . '/php/fetch/product.php';
