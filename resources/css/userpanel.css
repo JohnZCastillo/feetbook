@@ -1,0 +1,91 @@
+.container {
+  margin-inline: 5em;
+  padding-block: 2em;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.profile {
+  display: grid;
+}
+
+.profile:nth-child(1) {
+  border-right: 5px solid var(--primary-color);
+}
+
+.main:nth-child(1) {
+  border-bottom: 5px solid var(--primary-color);
+}
+
+.main:nth-child(2) {
+  justify-self: center;
+  padding-top: 2em;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+}
+
+.main ul li a {
+  font-size: 2rem;
+  line-height: 1em;
+  color: var(--primary-color);
+}
+
+.main ul li a span {
+  margin-left: 1em;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.user:nth-child(1) {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  line-height: 1rem;
+}
+
+.user:nth-child(2) {
+  font-weight: bold;
+  margin-bottom: -5em;
+}
+
+.profile:nth-child(2) {
+  border-left: 5px solid var(--primary-color);
+}
+
+.log-out {
+  margin-bottom: 2em;
+  text-align: right;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 5px;
+  font-weight: bold;
+}
+
+table {
+  padding-left: 2em;
+}
+
+table tr td:nth-child(1) {
+  font-weight: bold;
+}
+
+table tr td {
+  padding: 5px;
+}
+
+.profile:nth-child(2) {
+  grid-template-rows: 47% 53%;
+}
+
+.project {
+  background-color: var(--primary-color);
+  padding: 2px;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
