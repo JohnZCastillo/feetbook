@@ -11,40 +11,67 @@ require_once 'autoload.php';
 class UserDb
 {
 
-    //register user to db
-    public static function registerUser($user)
+    //register person in databse
+    public static function registerPerson($fullname, $email)
     {
 
-        // //check if username is available
-        // if (self::isUsernameTaken($user->getUsername())) {
-        //     throw new Exception('Username is in used');
-        // }
-
         //check if username is available
-        if (self::isEmailTaken($user->getEmail())) {
+        if (self::isEmailTaken($email)) {
             throw new Exception('Email is in used');
         }
 
-        $id =  $user->getId();
-        $name =  $user->getName();
-        $email =  $user->getEmail();
-        $password =  $user->getPassword();
-        $birthday =  $user->getBirthday();
-        $role =  $user->getRole();
-        $valid = $user->isValid();
         $connection = Database::open();
 
-        $stmt = $connection->prepare("INSERT INTO user values(?,?,?,?,?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO person(fullname,email) values(?,?)");
 
         $stmt->bind_param(
-            "sssssds",
-            $id,
-            $name,
+            "ss",
+            $fullname,
+            $email,
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
+
+    // register as user and put to the database
+    public static function registerUser($email, $password, $role)
+    {
+
+        $connection = Database::open();
+
+        $stmt = $connection->prepare("INSERT INTO user(email,password,role) values(?,?,?)");
+
+        $stmt->bind_param(
+            "sss",
             $email,
             $password,
-            $birthday,
-            $valid,
             $role
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
+
+    public static function registerLinks($email)
+    {
+        $connection = Database::open();
+
+        $stmt = $connection->prepare("INSERT INTO links(person_email) values(?)");
+
+        $stmt->bind_param(
+            "s",
+            $email,
         );
 
         $stmt->execute();
@@ -86,7 +113,11 @@ class UserDb
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT id,username,email,password,role,birthday FROM user where email = ?");
+        $stmt = $conn->prepare("
+        SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM (Person 
+        INNER JOIN user us ON person.email = us.email
+        INNER JOIN links li ON person.email = li.person_email)
+        WHERE person.email = ?");
 
         // set the ?'s mark data to parameter's data
         $stmt->bind_param("s", $email);
@@ -109,16 +140,10 @@ class UserDb
         Database::close($conn);
 
         //crete user base on collected data | more like format 
-        $user = new User($data['username'], $data['password'], $data['email'],);
-
-        // update id base on db
-        $user->setId($data['id']);
+        $user = new User($data['fullname'], $data['email'], $data['password'],);
 
         // update role base on db 
         $user->setRole($data['role']);
-
-        //update birthday
-        $user->setBirthday($data['birthday']);
 
         return $user;
     }
@@ -130,6 +155,7 @@ class UserDb
         $conn = Database::open();
 
         $stmt = $conn->prepare("SELECT id,username,email,password,role,birthday FROM user where id = ?");
+
 
         // set the ?'s mark data to parameter's data
         $stmt->bind_param("s", $id);
@@ -173,7 +199,7 @@ class UserDb
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT id,username,email,role,birthday FROM user");
+        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email");
 
         // execute prepared statement
         $stmt->execute();
@@ -192,9 +218,6 @@ class UserDb
 
             // update role base on db 
             $user->setRole($data['role']);
-
-            //update birthday
-            $user->setBirthday($data['birthday']);
 
             array_push($users, $user);
         }
@@ -227,7 +250,7 @@ class UserDb
             // open database connecti/on
             $conn = Database::open();
 
-            $stmt = $conn->prepare("SELECT username FROM user where email = ?");
+            $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email WHERE person.email = ?");
 
             // set the ?'s mark data to parameter's data
             $stmt->bind_param("s", $email);

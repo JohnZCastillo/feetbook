@@ -1,16 +1,16 @@
-# Market System
+# Feetbook
 
 ## How to use
 - start xampp
-- create a directory in xampp/htdocs/market-system
-- add file to market-system directory
+- create a directory in xampp/htdocs/feetbook
+- add file to feetbook folder
 
 ## Db setup
 - start xampp
 - visit http://localhost/phpmyadmin
-- create a database name market
+- create a database name feetbooko
 - click the market icom from the sidepanel (make user na click)
 - click import from the upper tab 
-- import market.sql
+- import feetbook.sql
 - change db/config settings according to your db connection
 

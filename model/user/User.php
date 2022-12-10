@@ -3,100 +3,142 @@
 namespace model\user;
 
 use model\user\Role;
-use controller\util\Util;
 
 
 class User
 {
 
     private $id;
-    private $name;
-    private $password;
-    private $role;
+    private $fullename;
     private $email;
-    private $birthday;
-    private $valid;
-
-    //create a user with a random generated id
-    //#note: id is not check if it is present id db. 
-    //upon creation user is assing as a role
-
-    public function __construct($name, $password, $email)
-    {
-        $this->id = Util::generateId();
-        $this->name = $name;
-        $this->password = $password;
-        $this->role = Role::$VISITOR;
+    private $mobile;
+    private $address;
+    private $job;
+    private $area;
+    private $password;
+    private $status;
+    private $created;
+    private $role;
+    private $facebook;
+    private $youtube;
+    private $website;
+    
+    public function __construct($fullename, $email, $password) {
+        $this->fullename = $fullename;
         $this->email = $email;
-        $this->valid = 0;
+        $this->password = $password;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function getName()
-    {
-        return $this->name;
+    public function getFullename() {
+        return $this->fullename;
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function getBirthday()
-    {
-        return $this->birthday;
+    public function getMobile() {
+        return $this->mobile;
     }
 
-    public function setId($id): void
-    {
+    public function getAddress() {
+        return $this->address;
+    }
+
+    public function getJob() {
+        return $this->job;
+    }
+
+    public function getArea() {
+        return $this->area;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function getFacebook() {
+        return $this->facebook;
+    }
+
+    public function getYoutube() {
+        return $this->youtube;
+    }
+
+    public function getWebsite() {
+        return $this->website;
+    }
+
+    public function setId($id): void {
         $this->id = $id;
     }
 
-    public function setName($name): void
-    {
-        $this->name = $name;
+    public function setFullename($fullename): void {
+        $this->fullename = $fullename;
     }
 
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
-
-    public function setRole($role): void
-    {
-        $this->role = $role;
-    }
-
-    public function setEmail($email): void
-    {
+    public function setEmail($email): void {
         $this->email = $email;
     }
 
-    public function setBirthday($birthday): void
-    {
-        $this->birthday = $birthday;
-    }
-    public function setValid($valid): void
-    {
-        $this->valid = $valid;
+    public function setMobile($mobile): void {
+        $this->mobile = $mobile;
     }
 
-    public function isValid()
-    {
-        return $this->valid;
+    public function setAddress($address): void {
+        $this->address = $address;
     }
+
+    public function setJob($job): void {
+        $this->job = $job;
+    }
+
+    public function setArea($area): void {
+        $this->area = $area;
+    }
+
+    public function setPassword($password): void {
+        $this->password = $password;
+    }
+
+    public function setStatus($status): void {
+        $this->status = $status;
+    }
+
+    public function setCreated($created): void {
+        $this->created = $created;
+    }
+
+    public function setRole($role): void {
+        $this->role = $role;
+    }
+
+    public function setFacebook($facebook): void {
+        $this->facebook = $facebook;
+    }
+
+    public function setYoutube($youtube): void {
+        $this->youtube = $youtube;
+    }
+
+    public function setWebsite($website): void {
+        $this->website = $website;
+    }
+
 }

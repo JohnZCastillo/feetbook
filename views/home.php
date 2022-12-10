@@ -41,33 +41,6 @@ session_start();
         <!-- Jobs -->
         <section class="jobs">
 
-            <?php
-
-            try {
-                foreach (ServiceDb::getServices() as $service) {
-
-                    echo "<div class='posted-job'>";
-
-                    $type = TypeDb::getTypeById($service->getType())->getTitle();
-                    $title = $service->getTitle();
-                    $description = $service->getDescription();
-                    $date = $service->getDateCreated();
-                    $posterName = UserDb::getUserById($service->getPosterId())->getName();
-
-                    echo "<span class='job-type'>$type</span>";
-                    echo "<span class='job-title'>$title</span>";
-                    echo "<span class='job-description'>$description</span>";
-                    echo "<span class='job-poster'>$posterName</span>";
-                    echo "<span class='job-date'>$date</span>";
-
-                    echo "</div>";
-                }
-            } catch (Exception $e) {
-                echo $e->getMessage();
-            }
-
-
-            ?>
         </section>
 
     </div>

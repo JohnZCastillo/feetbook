@@ -11,7 +11,7 @@ class Config
     private static $servername = "127.0.0.1:3308";
     private static $username = "root";
     private static $password = "";
-    private static $database = "market";
+    private static $database = "feetbook";
 
     //configuration
     // private static $servername = "sql301.epizy.com:3306";

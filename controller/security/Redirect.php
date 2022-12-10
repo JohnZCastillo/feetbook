@@ -1,5 +1,4 @@
 <?php
-
 // This file redirec users to their corresponding  role
 namespace controller\security;
 
@@ -12,11 +11,11 @@ require_once 'autoload.php';
 // check weather user is login if not redirect them to login page
 if (isset($_SESSION['isLogin'])) {
     if (!$_SESSION['isLogin']) {
-        header('Location: /market-system/login');
+        header('Location: ./login');
         die();
     }
 } else {
-    header('Location: /market-system/login');
+    header('Location: ./login');
     die();
 }
 
@@ -26,23 +25,7 @@ if (isset($_SESSION['userRole'])) {
 
         case Role::$ADMIN:
 
-            header('Location: /market-system/admin');
-
-            die();
-
-            break;
-
-        case Role::$VISITOR:
-
-            header('Location: /market-system/visitor');
-
-            die();
-
-            break;
-
-        case Role::$EMPLOYEE:
-
-            header('Location: /market-system/employeer');
+            header('Location: ./admin');
 
             die();
 
@@ -50,7 +33,7 @@ if (isset($_SESSION['userRole'])) {
 
         case Role::$USER:
 
-            header('Location: /market-system/user');
+            header('Location: ./user');
 
             die();
 

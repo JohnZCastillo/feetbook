@@ -37,8 +37,6 @@ function validate($email, $password)
 
             $_SESSION['userRole'] = $user->getRole();
 
-            $_SESSION['userId'] = $user->getId();
-
             return true;
         }
 

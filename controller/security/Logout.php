@@ -11,7 +11,7 @@ if (isset($_SESSION['isLogin'])) {
 
         session_destroy();
 
-        header('Location: /market-system/login');
+        header('Location: ./login');
 
         die();
     }
@@ -19,6 +19,6 @@ if (isset($_SESSION['isLogin'])) {
 
 $_SESSION['loginError'] = "You're not login!";
 
-header('Location: /market-system/login');
+header('Location: ./login');
 
 die();

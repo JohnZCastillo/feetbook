@@ -104,7 +104,7 @@ if (isset($_SESSION['isLogin'])) {
                 }
 
                 //redirect user if login is successful
-                window.location.replace("http://localhost/market-system/redirect");
+                window.location.replace("./redirect");
 
             } catch (error) {
                 console.log(errorDisplay);

@@ -96,8 +96,7 @@ require_once 'autoload.php';
           body: JSON.stringify({
             name: name.value,
             email: email.value,
-            password: password.value,
-            birthday: birthday.value
+            password: password.value
           })
         });
 
