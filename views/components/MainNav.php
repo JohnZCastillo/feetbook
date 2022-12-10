@@ -10,14 +10,11 @@ class MainNav
     {
         echo "  <nav class='nav'>
         <div class='nav__logo'>
-            <span>Web-based Service</span>
-            <br>
-            <span>Market System</span>
+            <span>FeetBook</span>
         </div>
-        <a href='./explore' class='nav__link'>Explore</a>
+        <a href='./home' class='nav__link'>Home</a>
         <a href='./login' class='nav__link'>Login</a>
         <a href='./signup' class='nav__link'>Singup</a>
-        <a href='./findjob' class='nav__link'>Find a Job</a>
     </nav>";
     }
 }

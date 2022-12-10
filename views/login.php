@@ -41,37 +41,31 @@ if (isset($_SESSION['isLogin'])) {
         <?php MainNav::nav() ?>
 
         <div class="login-wrapper">
-            <div class="login__header">
-                <i class="fa-solid fa-globe fa-2xl" id="logo"></i>
-            </div>
 
-            <div class="form-wrapper">
-                <form action="" class="login__form" id="login-form">
-                    <div>
-                        <input type="text" id="username" name="username" class="field" required>
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div>
-                        <input type="password" id="password" name="password" class="field" required>
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <div>
-                        <button type="submit" id="login-btn">Login</button>
-                    </div>
-                    <div>
-                        <small id="login-error">
-                            <?php
-                            if (isset($_SESSION["loginError"])) {
-                                echo $_SESSION["loginError"];
-                                //clear error
-                                unset($_SESSION["loginError"]);
-                            }
-                            ?>
-                        </small>
-                    </div>
-                </form>
-            </div>
-
+            <form action="" class="login__form" id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="field" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="field" required>
+                </div>
+                <div>
+                    <button type="submit" id="login-btn">Login</button>
+                </div>
+                <div>
+                    <small id="login-error">
+                        <?php
+                        if (isset($_SESSION["loginError"])) {
+                            echo $_SESSION["loginError"];
+                            //clear error
+                            unset($_SESSION["loginError"]);
+                        }
+                        ?>
+                    </small>
+                </div>
+            </form>
         </div>
 
     </div>

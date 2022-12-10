@@ -18,7 +18,7 @@ require_once 'autoload.php';
   <!-- Pull Header -->
   <?php Header::getHeader() ?>
 
-  <title>Shoepa | Signup</title>
+  <title>FeetBook</title>
 </head>
 
 <body>
@@ -31,11 +31,13 @@ require_once 'autoload.php';
     <?php MainNav::nav() ?>
 
     <div class="singup-wrapper">
-      <h1>Create New Account</h1>
-      <p>Already registered? <a href="./login">Login here</a></p>
       <form class="singup-form" id="signup-form">
+        <div>
+          <h1 class="text-center">REGISTER</h1>
+          <p>Already registered? <a href="./login">Login here</a></p>
+        </div>
         <div class="form-block">
-          <label for="name">Name</label>
+          <label for="name">Full Name</label>
           <input type="text" name="name" id="name" required>
         </div>
         <div class="form-block">
@@ -47,8 +49,8 @@ require_once 'autoload.php';
           <input type="password" name="name" id="password" required>
         </div>
         <div class="form-block">
-          <label for="name">Date of Birth</label>
-          <input type="date" name="date" id="birthday">
+          <label for="name">Confirm Password</label>
+          <input type="password" name="name" id="password" required>
         </div>
         <div class="form-block">
           <button type="submit" class="btn btn-primary" id="singup">Signup</button>

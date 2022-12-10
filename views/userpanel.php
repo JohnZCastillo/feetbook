@@ -4,22 +4,22 @@ use model\user\Role;
 
 session_start();
 
-// redirect user if not login
-if (!isset($_SESSION["isLogin"])) {
-    $_SESSION["loginError"] = "You're not login!. Login First";
-    header('Location: ./login');
-    exit();
-}
+// // redirect user if not login
+// if (!isset($_SESSION["isLogin"])) {
+//     $_SESSION["loginError"] = "You're not login!. Login First";
+//     header('Location: ./login');
+//     exit();
+// }
 
-//redirect to login page if not login
-if (!$_SESSION["isLogin"]) {
-    header('Location: ./login');
-    exit();
-}
+// //redirect to login page if not login
+// if (!$_SESSION["isLogin"]) {
+//     header('Location: ./login');
+//     exit();
+// }
 
-if ($_SESSION['userRole'] !== Role::$USER) {
-    header('Location: ./redirect');
-}
+// if ($_SESSION['userRole'] !== Role::$USER) {
+//     header('Location: ./redirect');
+// }
 
 ?>
 <!DOCTYPE html>

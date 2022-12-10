@@ -9,7 +9,7 @@ require_once './autoload.php';
 
 // folder inside htdocs.
 // check htaccess.
-$base = '/market-system/';
+$base = '/feetbook/';
 
 // reroute request to views.
 switch ($request) {
