@@ -4,9 +4,11 @@ namespace controller\security;
 
 require_once 'autoload.php';
 
+use db\History;
 use db\UserDb;
 use Exception;
 use model\user\Role;
+use db\HistoryDb;
 
 
 session_start();
@@ -37,6 +39,14 @@ function validate($email, $password)
 
             $_SESSION['userRole'] = $user->getRole();
 
+            $_SESSION['userEmail'] = $email;
+
+            $sessionId = session_id();
+            $timestamp = date('Y-m-d H:i:s', time());
+
+            //save login history
+            $_SESSION['historyId'] = HistoryDb::login($sessionId, $email, $timestamp);
+
             return true;
         }
 
@@ -56,6 +66,7 @@ function login($email, $password)
     try {
 
         if (validate($email, $password)) {
+
 
             $_SESSION['isLogin'] = true;
 

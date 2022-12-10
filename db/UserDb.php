@@ -186,9 +186,6 @@ class UserDb
         // update role base on db 
         $user->setRole($data['role']);
 
-        //update birthday
-        $user->setBirthday($data['birthday']);
-
         return $user;
     }
 
