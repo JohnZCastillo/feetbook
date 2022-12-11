@@ -16,20 +16,14 @@ switch ($request) {
     case $base:
         require __DIR__ . '/views/home.php';
         break;
-    case $base . 'explore':
-        require __DIR__ . '/views/home.php';
+    case $base . 'settings':
+        require __DIR__ . '/views/user/settings.php';
         break;
-    case $base . 'about':
-        require __DIR__ . '/views/about.php';
+    case $base . 'profile':
+        require __DIR__ . '/views/user/profile.php';
         break;
     case $base . 'user':
-        require __DIR__ . '/views/user.php';
-        break;
-    case $base . 'product':
-        require __DIR__ . '/php/fetch/product.php';
-        break;
-    case $base . 'team':
-        require __DIR__ . '/views/team.php';
+        require __DIR__ . '/views/user/profile.php';
         break;
     case $base . 'login':
         require __DIR__ . '/views/login.php';
@@ -40,14 +34,20 @@ switch ($request) {
     case $base . 'auth':
         require __DIR__ . '/controller/security/Login.php';
         break;
-    case $base . 'findjob':
-        require __DIR__ . '/views/findjob.php';
+    case $base . 'history':
+        require __DIR__ . '/views/admin/history.php';
         break;
-    case $base . 'user':
-        require __DIR__ . '/views/userpanel.php';
+    case $base . 'update-details':
+        require __DIR__ . '/controller/user/UpdateDetails.php';
+        break;
+    case $base . 'logs':
+        require __DIR__ . '/views/user/logs.php';
+        break;
+    case $base . 'update-link':
+        require __DIR__ . '/controller/user/UpdateLink.php';
         break;
     case $base . 'admin':
-        require __DIR__ . '/views/admin.php';
+        require __DIR__ . '/views/admin/admin.php';
         break;
     case $base . 'visitor':
         require __DIR__ . '/views/visitor.php';
@@ -60,33 +60,6 @@ switch ($request) {
         break;
     case $base . 'register':
         require __DIR__ . '/controller/security/RegisterUser.php';
-        break;
-    case $base . 'dashboard':
-        require __DIR__ . '/views/admin/dashboard.php';
-        break;
-    case $base . 'add-service':
-        require __DIR__ . '/controller/service/AddService.php';
-        break;
-    case $base . 'employeer':
-        require __DIR__ . '/views/employeer.php';
-        break;
-    case $base . 'add-type':
-        require __DIR__ . '/controller/type/AddType.php';
-        break;
-    case $base . 'services':
-        require __DIR__ . '/views/admin/services.php';
-        break;
-    case $base . 'dashboard':
-        require __DIR__ . '/views/admin/dashboard.php';
-        break;
-    case $base . 'customers':
-        require __DIR__ . '/views/admin/customers.php';
-        break;
-    case $base . 'category':
-        require __DIR__ . '/views/admin/service-category.php';
-        break;
-    case $base . 'provider':
-        require __DIR__ . '/views/admin/service-provider.php';
         break;
     case $base . 'home':
         require __DIR__ . '/views/home.php';

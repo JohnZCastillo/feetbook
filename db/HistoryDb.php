@@ -5,6 +5,7 @@ namespace db;
 use Exception;
 use db\Database;
 use model\user\User;
+use model\user\History;
 
 require_once 'autoload.php';
 
@@ -65,5 +66,44 @@ class HistoryDb
         Database::close($connection);
 
         return $error;
+    }
+
+    public static function getHistories()
+    {
+
+        // open database connection
+        $conn = Database::open();
+
+        $stmt = $conn->prepare("SELECT *  from history");
+
+        // execute prepared statement
+        $stmt->execute();
+
+        //get result
+        $result = $stmt->get_result();
+
+        $histories = array();
+
+        while ($data = $result->fetch_assoc()) {
+            //crete user base on collected data | more like format 
+            $history = new History();
+
+            $history->setId($data['id']);
+            $history->setSessionId($data['session_id']);
+            $history->setEmail($data['email']);
+            $history->setLogin($data['login_date']);
+            $history->setLogout($data['logout_date']);
+
+            array_push($histories, $history);
+        }
+
+        Database::close($conn);
+
+        // throw an exception data is null that means username is not present in db
+        if ($histories == null) {
+            throw new Exception('Username not found | Invalid Connection');
+        }
+
+        return $histories;
     }
 }

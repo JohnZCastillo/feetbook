@@ -50,7 +50,7 @@ require_once 'autoload.php';
         </div>
         <div class="form-block">
           <label for="name">Confirm Password</label>
-          <input type="password" name="name" id="password" required>
+          <input type="password" name="name" id="password2" required>
         </div>
         <div class="form-block">
           <button type="submit" class="btn btn-primary" id="singup">Signup</button>
@@ -75,6 +75,7 @@ require_once 'autoload.php';
     const name = document.querySelector("#name");
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
+    const password2 = document.querySelector("#password2");
     const birthday = document.querySelector("#birthday");
 
     const errorDisplay = document.querySelector('.error-display');
@@ -114,7 +115,7 @@ require_once 'autoload.php';
         name.value = "";
         email.value = "";
         password.value = "";
-        birthday.value = "";
+        password2.value = "";
 
         alert("Registration Success!");
 

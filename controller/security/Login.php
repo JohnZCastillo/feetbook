@@ -41,6 +41,16 @@ function validate($email, $password)
 
             $_SESSION['userEmail'] = $email;
 
+            $_SESSION['email'] = $email;
+            $_SESSION['fullname'] = $user->getFullname();
+            $_SESSION['job'] = $user->getJob();
+            $_SESSION['address'] = $user->getAddress();
+            $_SESSION['mobile'] = $user->getMobile();
+
+            $_SESSION['facebook'] = $user->getFacebook();
+            $_SESSION['instagram'] = $user->getYoutube();
+            $_SESSION['website'] = $user->getWebsite();
+
             $sessionId = session_id();
             $timestamp = date('Y-m-d H:i:s', time());
 
@@ -68,7 +78,9 @@ function login($email, $password)
         if (validate($email, $password)) {
 
 
+
             $_SESSION['isLogin'] = true;
+            $_SESSION['userEmail'] = $email;
 
             echo json_encode(['message' => 'ok']);
 

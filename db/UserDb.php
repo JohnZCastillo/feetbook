@@ -140,10 +140,21 @@ class UserDb
         Database::close($conn);
 
         //crete user base on collected data | more like format 
-        $user = new User($data['fullname'], $data['email'], $data['password'],);
+        $user = new User($data['fullname'], $data['email'], $data['password']);
 
-        // update role base on db 
+        $user->setFullname($data['fullname']);
+        $user->setEmail($data['email']);
+        $user->setMobile($data['mobile']);
+        $user->setAddress($data['address']);
+        $user->setJob($data['job']);
+        $user->setArea($data['area']);
+        $user->setPassword($data['password']);
+        $user->setStatus($data['status']);
+        $user->setCreated($data['created']);
         $user->setRole($data['role']);
+        $user->setFacebook($data['facebook']);
+        $user->setYoutube($data['youtube']);
+        $user->setWebsite($data['website']);
 
         return $user;
     }
@@ -154,7 +165,7 @@ class UserDb
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT id,username,email,password,role,birthday FROM user where id = ?");
+        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email where id = ?");
 
 
         // set the ?'s mark data to parameter's data
@@ -178,13 +189,22 @@ class UserDb
         Database::close($conn);
 
         //crete user base on collected data | more like format 
-        $user = new User($data['username'], $data['password'], $data['email'],);
+        $user = new User($data['fullname'], $data['email'], $data['password']);
 
-        // update id base on db
-        $user->setId($data['id']);
 
-        // update role base on db 
+        $user->setFullname($data['fullname']);
+        $user->setEmail($data['email']);
+        $user->setMobile($data['mobile']);
+        $user->setAddress($data['address']);
+        $user->setJob($data['job']);
+        $user->setArea($data['area']);
+        $user->setPassword($data['password']);
+        $user->setStatus($data['status']);
+        $user->setCreated($data['created']);
         $user->setRole($data['role']);
+        $user->setFacebook($data['facebook']);
+        $user->setYoutube($data['youtube']);
+        $user->setWebsite($data['website']);
 
         return $user;
     }
@@ -208,13 +228,21 @@ class UserDb
 
         while ($data = $result->fetch_assoc()) {
             //crete user base on collected data | more like format 
-            $user = new User($data['username'], 'NULL', $data['email']);
+            $user = new User($data['fullname'], $data['email'], $data['password']);
 
-            // update id baso on db
-            $user->setId($data['id']);
-
-            // update role base on db 
+            $user->setFullname($data['fullname']);
+            $user->setEmail($data['email']);
+            $user->setMobile($data['mobile']);
+            $user->setAddress($data['address']);
+            $user->setJob($data['job']);
+            $user->setArea($data['area']);
+            $user->setPassword($data['password']);
+            $user->setStatus($data['status']);
+            $user->setCreated($data['created']);
             $user->setRole($data['role']);
+            $user->setFacebook($data['facebook']);
+            $user->setYoutube($data['youtube']);
+            $user->setWebsite($data['website']);
 
             array_push($users, $user);
         }
@@ -273,5 +301,78 @@ class UserDb
         }
 
         return true;
+    }
+
+    public static function updateLink($email, $link, $value)
+    {
+        $connection = Database::open();
+
+        $statment = "";
+
+        switch ($link) {
+            case "facebook":
+                $statment = "UPDATE links set facebook = ? where person_email = ?";
+                break;
+            case "instagram":
+                $statment = "UPDATE links set youtube = ? where  person_email = ?";
+                break;
+            case "website":
+                $statment = "UPDATE links set website = ? where  person_email = ?";
+                break;
+        }
+
+        $stmt = $connection->prepare($statment);
+
+        $stmt->bind_param(
+            "ss",
+            $value,
+            $email
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
+
+    public static function updateDetails($email, $link, $value)
+    {
+        $connection = Database::open();
+
+        $statment = "";
+
+        switch ($link) {
+            case "fullname":
+                $statment = "UPDATE person set fullname = ? where email = ?";
+                break;
+            case "mobile":
+                $statment = "UPDATE person set mobile = ? where email = ?";
+                break;
+            case "address":
+                $statment = "UPDATE person set address = ? where email = ?";
+                break;
+            case "job":
+                $statment = "UPDATE person set job = ? where email = ?";
+                break;
+        }
+
+        $stmt = $connection->prepare($statment);
+
+        $stmt->bind_param(
+            "ss",
+            $value,
+            $email
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
     }
 }
