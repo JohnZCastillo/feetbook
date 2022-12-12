@@ -7,6 +7,8 @@ $request = $_SERVER['REQUEST_URI'];
 
 require_once './autoload.php';
 
+date_default_timezone_set("Asia/Manila");
+
 // folder inside htdocs.
 // check htaccess.
 $base = '/feetbook/';
@@ -24,6 +26,9 @@ switch ($request) {
         break;
     case $base . 'user':
         require __DIR__ . '/views/user/profile.php';
+        break;
+    case $base . 'update-profile':
+        require __DIR__ . '/controller/user/UpdateProfile.php';
         break;
     case $base . 'login':
         require __DIR__ . '/views/login.php';

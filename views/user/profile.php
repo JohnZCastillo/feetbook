@@ -143,7 +143,15 @@ if ($_SESSION['userRole'] != Role::$USER) {
     <section class="content">
         <div class="content__left">
             <div class="left__top">
-                <img src="./resources/images/user.png" class="thumbnail">
+
+                <?php
+                if (isset($_SESSION['userProfile'])) {
+                    $image = $_SESSION['userProfile'];
+                    echo "<img src=\"./assets/profile/$image\" class=\"thumbnail\">";
+                } else {
+                    echo "<img src=\"./resources/images/user.png\" class=\"thumbnail\">";
+                }
+                ?>
                 <h2 class="name">
                     <?php
                     if (isset($_SESSION['fullname'])) {
@@ -174,22 +182,23 @@ if ($_SESSION['userRole'] != Role::$USER) {
 
             </div>
             <div class="socials">
-                <a class="links" href="#">
+                <div class="links">
                     <img src="./resources/images/facebook.png" class="icon">
                     <?php
                     if (isset($_SESSION['facebook'])) {
-                        echo $_SESSION['facebook'];
+                        $link = $_SESSION['facebook'];
+                        echo "<a href=\"$link\">$link</a>";
                     } else {
                         echo "<span>smith.com</span>";
                     }
                     ?>
-                </a>
+                </div>
                 <div class="links">
                     <img src="./resources/images/ig.png" class="icon">
-
                     <?php
                     if (isset($_SESSION['instagram'])) {
-                        echo $_SESSION['instagram'];
+                        $link = $_SESSION['instagram'];
+                        echo "<a href=\"$link\">$link</a>";
                     } else {
                         echo "<span>mr.smith</span>";
                     }
@@ -200,7 +209,8 @@ if ($_SESSION['userRole'] != Role::$USER) {
 
                     <?php
                     if (isset($_SESSION['website'])) {
-                        echo $_SESSION['website'];
+                        $link =  $_SESSION['website'];
+                        echo "<a href=\"$link\">$link</a>";
                     } else {
                         echo "<span>smithbot.com</span>";
                     }

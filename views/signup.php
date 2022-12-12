@@ -89,6 +89,11 @@ require_once 'autoload.php';
 
       try {
 
+        //throw an error if password and password2 does not match
+        if (!(password.value === password2.value)) {
+          throw new Error("Password and Confirm password does not match");
+        }
+
         let result = await fetch("./register", {
           method: "POST",
           headers: {
@@ -106,15 +111,10 @@ require_once 'autoload.php';
         result = await result.json();
 
         //throw an error in receive status code is not 200
-        if (!isValid) 
-        {
-          if(result.message == "Email is in used")
-          {
-            result.message = "Email is already used.";;
-          }
+        if (!isValid) {
           throw new Error(result.message);
         }
-        
+
         // clear input if signup success
         name.value = "";
         email.value = "";

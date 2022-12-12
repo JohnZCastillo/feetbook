@@ -25,6 +25,10 @@ if (!$_SESSION["isLogin"]) {
 if ($_SESSION['userRole'] != Role::$USER) {
     header('Location: ./redirect');
 }
+
+if (isset($_SESSION['profileError'])) {
+    echo    $_SESSION['profileError'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -203,6 +207,12 @@ if ($_SESSION['userRole'] != Role::$USER) {
     <section class="content">
         <div class="forms">
             <h2 class="title">Settings</h2>
+
+            <form id="address-form" method="POST" action="./update-profile" enctype="multipart/form-data">
+                <label>Profile</label>
+                <input type="file" name="image" id="image">
+                <button type="submit" class="btn">Change</button>
+            </form>
 
             <form id="mobile-form" method="POST" action="./update-details">
                 <label>Fullname</label>

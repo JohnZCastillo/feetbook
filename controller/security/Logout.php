@@ -16,9 +16,7 @@ if (isset($_SESSION['isLogin'])) {
         $email = $_SESSION['userEmail'];
         $id = $_SESSION['historyId'];
 
-        HistoryDb::logout($id, $sessionId, $email, $timestamp);
-
-        echo $sessionId;
+        HistoryDb::logout($id, $timestamp);
 
         session_destroy();
 

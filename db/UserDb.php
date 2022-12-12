@@ -155,6 +155,7 @@ class UserDb
         $user->setFacebook($data['facebook']);
         $user->setYoutube($data['youtube']);
         $user->setWebsite($data['website']);
+        $user->setProfile($data['profile']);
 
         return $user;
     }
@@ -205,6 +206,7 @@ class UserDb
         $user->setFacebook($data['facebook']);
         $user->setYoutube($data['youtube']);
         $user->setWebsite($data['website']);
+        $user->setProfile($data['profile']);
 
         return $user;
     }
@@ -243,6 +245,7 @@ class UserDb
             $user->setFacebook($data['facebook']);
             $user->setYoutube($data['youtube']);
             $user->setWebsite($data['website']);
+            $user->setProfile($data['profile']);
 
             array_push($users, $user);
         }
@@ -374,5 +377,69 @@ class UserDb
         Database::close($connection);
 
         return $error;
+    }
+
+    public static function blockUser($id)
+    {
+
+        $connection = Database::open();
+
+        $statment = "UPDATE user set status = 0 where email = ?";
+
+        $stmt = $connection->prepare($statment);
+
+        $stmt->bind_param(
+            "s",
+            $id
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
+
+    public static function unblockUser($id)
+    {
+
+        $connection = Database::open();
+
+        $statment = "UPDATE user set status = 1 where email = ?";
+
+        $stmt = $connection->prepare($statment);
+
+        $stmt->bind_param(
+            "s",
+            $id
+        );
+
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
+
+    public static function updateUserProfile($id, $link)
+    {
+        $connection = Database::open();
+
+        $stmt = $connection->prepare("UPDATE user set profile = ? WHERE email = ?");
+
+        $stmt->bind_param("ss", $link, $id);
+        $stmt->execute();
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        if ($error !== null && $error !== '') {
+            throw new Exception("Update Failed ");
+        }
     }
 }

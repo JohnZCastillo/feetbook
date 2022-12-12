@@ -20,6 +20,7 @@ class User
     private $facebook;
     private $youtube;
     private $website;
+    private $profile;
 
     public function __construct($fullname, $email, $password)
     {
@@ -31,6 +32,16 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    public function setProfile($profile)
+    {
+        return $this->profile = $profile;
     }
 
     public function getFullname()

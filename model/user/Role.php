@@ -5,6 +5,6 @@ namespace model\user;
 
 class Role
 {
-     static $USER = '1';
-     static $ADMIN = '2';
+     static $USER = '2';
+     static $ADMIN = '1';
 }

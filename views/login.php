@@ -98,18 +98,15 @@ if (isset($_SESSION['isLogin'])) {
 
                 result = await result.json();
 
-                if(result.message === "Incorrect email or Password")
-                {
-                    result = "Incorrect Password";
-                }
-                else if(result.message === "Username not found | Invalid Connection")
-                {
-                    result = "Incorrect Email";
+                if (result.message === "Incorrect email or Password") {
+                    result.message = "Incorrect Password";
+                } else if (result.message === "Username not found | Invalid Connection") {
+                    result.message = "Incorrect Email";
                 }
 
                 //throw an error in receive status code is not 200
                 if (!isValid) {
-                    throw new Error(result);
+                    throw new Error(result.message);
                 }
 
                 //redirect user if login is successful

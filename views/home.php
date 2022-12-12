@@ -44,7 +44,7 @@ session_start();
 
         <section class="content">
             <h1>Feetbook</h1>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, nemo iure consectetur quasi est exercitationem qui id voluptates, adipisci magni eaque quibusdam eius nulla labore cupiditate harum aut deserunt neque. Illo assumenda sapiente perspiciatis officiis omnis suscipit cumque ea? Sapiente molestias modi animi voluptates deserunt architecto omnis error recusandae ut ipsa veritatis laboriosam, aut, officia sed est autem, minima ipsum veniam labore reiciendis! Deserunt dolores ad obcaecati iure possimus magnam ipsa explicabo suscipit quas, repellat fugiat error. Ipsa rerum nam cupiditate dicta maiores, quam nisi, corrupti ea sed nostrum minus. Recusandae nemo reprehenderit veniam non facere minus saepe accusantium aliquam?
+            <p>FeetBook 2022 This is the Feetbook website, where you can experience better and easier socializing. You can connect to your loved ones all over the world. </p>
         </section>
 
     </div>

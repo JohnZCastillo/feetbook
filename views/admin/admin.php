@@ -31,6 +31,34 @@ if (!$_SESSION["isLogin"]) {
 if ($_SESSION['userRole'] != Role::$ADMIN) {
     header('Location: ./redirect');
 }
+
+// block user
+if (isset($_POST['block'])) {
+    try {
+        $id = $_POST['block'];
+        UserDb::blockUser($id);
+        header("location: ./admin");
+    } catch (Exception $e) {
+        // $_SESSION['errorBlock'] = "Unable to block user";
+        $_SESSION['errorBlock'] = $e->getMessage();
+        header("location: ./admin");
+    }
+}
+
+
+// unblock user
+if (isset($_POST['unblock'])) {
+    try {
+        $id = $_POST['unblock'];
+        UserDb::unblockUser($id);
+        header("location: ./admin");
+    } catch (Exception $e) {
+        // $_SESSION['errorBlock'] = "Unable to block user";
+        $_SESSION['errorBlock'] = $e->getMessage();
+        header("location: ./admin");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +156,12 @@ if ($_SESSION['userRole'] != Role::$ADMIN) {
             <h2>Users</h2>
             <?php
             try {
-                $header = ["Fullname", "Email", "Mobile", "Address", "Job", "Registered"];
+
+                if (isset($_SESSION['errorBlock'])) {
+                    echo   $_SESSION['errorBlock'];
+                }
+
+                $header = ["Fullname", "Email", "Mobile", "Address", "Registered", "Status", "Action"];
 
                 $users = array();
                 foreach (UserDb::getAllUser() as $user) {
@@ -136,14 +169,34 @@ if ($_SESSION['userRole'] != Role::$ADMIN) {
                     //only show users
                     if ($user->getRole() != Role::$USER) continue;
 
+                    $id = $user->getEmail();
+
+                    $block;
+
+                    $action = "<button class=\"action\">Block</button><button class=\"action\">Delete</button>";
                     $data = array();
+
+                    $status = $user->getStatus();
+
+                    if ($status == 1) {
+                        $block = "<form method=\"POST\" action=\"./admin\">
+                        <input value=\"$id\" name=\"block\" class=\"hide\">
+                        <button class=\"action\">block</button>
+                    </form>";
+                    } else {
+                        $block = "<form method=\"POST\" action=\"./admin\">
+                        <input value=\"$id\" name=\"unblock\" class=\"hide\">
+                        <button class=\"action\">unblock</button>
+                    </form>";
+                    }
 
                     array_push($data,  $user->getFullname());
                     array_push($data,  $user->getEmail());
                     array_push($data,  $user->getMobile());
                     array_push($data,  $user->getAddress());
-                    array_push($data,  $user->getJob());
                     array_push($data,  $user->getCreated());
+                    array_push($data,  $status == 1 ? "Active" : "Blocked");
+                    array_push($data,  $block);
                     array_push($users,  $data);
                 }
                 TableLayout::setLayout($header, $users, "history-table");
@@ -156,6 +209,9 @@ if ($_SESSION['userRole'] != Role::$ADMIN) {
     </div>
 
     <script src="./resources/js/pagination.js"></script>
+    <script>
+
+    </script>
 </body>
 
 </html>

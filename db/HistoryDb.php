@@ -45,17 +45,18 @@ class HistoryDb
         return $data["id"];
     }
 
-    public static function logout($id, $sessionId, $email, $timestamp)
+    public static function logout($id, $timestamp)
     {
+
+        // $id, $sessionId, $email, $timestamp);
         $connection = Database::open();
 
-        $stmt = $connection->prepare("UPDATE history SET logout_date = ? where session_id = ? and email = ? and id = ?");
+
+        $stmt = $connection->prepare("UPDATE history set logout_date = ? where id = ?");
 
         $stmt->bind_param(
-            "ssss",
+            "sd",
             $timestamp,
-            $sessionId,
-            $email,
             $id
         );
 
@@ -91,7 +92,9 @@ class HistoryDb
             $history->setId($data['id']);
             $history->setSessionId($data['session_id']);
             $history->setEmail($data['email']);
+
             $history->setLogin($data['login_date']);
+
             $history->setLogout($data['logout_date']);
 
             array_push($histories, $history);

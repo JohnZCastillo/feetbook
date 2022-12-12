@@ -13,8 +13,8 @@ class MainNav
             <span>FeetBook</span>
         </div>
         <a href='./home' class='nav__link'>Home</a>
-        <a href='./login' class='nav__link'>Login</a>
-        <a href='./signup' class='nav__link'>Signup</a>
+        <a href='./login' class='nav__link'>Log In</a>
+        <a href='./signup' class='nav__link'>Sign Up</a>
     </nav>";
     }
 }

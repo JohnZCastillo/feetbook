@@ -8,7 +8,7 @@ class Config
 {
 
     // local development
-    private static $servername = "127.0.0.1:3306";
+    private static $servername = "127.0.0.1:3308";
     private static $username = "root";
     private static $password = "";
     private static $database = "feetbook";

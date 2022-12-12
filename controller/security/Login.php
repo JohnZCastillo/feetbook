@@ -37,6 +37,10 @@ function validate($email, $password)
 
         if ($user->getPassword() ===  $password && $user->getEmail() === $email) {
 
+            if ($user->getStatus() != 1) {
+                throw new Exception("User have been blocked by the admin");
+            }
+
             $_SESSION['userRole'] = $user->getRole();
 
             $_SESSION['userEmail'] = $email;
@@ -51,8 +55,13 @@ function validate($email, $password)
             $_SESSION['instagram'] = $user->getYoutube();
             $_SESSION['website'] = $user->getWebsite();
 
+            $_SESSION['userProfile'] = $user->getProfile();
+
             $sessionId = session_id();
+
+            // $timestamp = date('Y-m-d h:i:s A', time());
             $timestamp = date('Y-m-d H:i:s', time());
+            // $timestamp =  date('F d Y h:i A', time());
 
             //save login history
             $_SESSION['historyId'] = HistoryDb::login($sessionId, $email, $timestamp);
