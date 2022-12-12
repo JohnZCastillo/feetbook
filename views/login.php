@@ -98,9 +98,18 @@ if (isset($_SESSION['isLogin'])) {
 
                 result = await result.json();
 
+                if(result.message === "Incorrect email or Password")
+                {
+                    result = "Incorrect Password";
+                }
+                else if(result.message === "Username not found | Invalid Connection")
+                {
+                    result = "Incorrect Email";
+                }
+
                 //throw an error in receive status code is not 200
                 if (!isValid) {
-                    throw new Error(result.message);
+                    throw new Error(result);
                 }
 
                 //redirect user if login is successful
@@ -119,3 +128,4 @@ if (isset($_SESSION['isLogin'])) {
 <?php
 unset($_SESSION["loginError"]);
 unset($_SESSION["registerSuccess"]);
+?>

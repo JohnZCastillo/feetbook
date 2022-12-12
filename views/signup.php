@@ -101,16 +101,20 @@ require_once 'autoload.php';
           })
         });
 
-
         const isValid = result.ok;
 
         result = await result.json();
 
         //throw an error in receive status code is not 200
-        if (!isValid) {
+        if (!isValid) 
+        {
+          if(result.message == "Email is in used")
+          {
+            result.message = "Email is already used.";;
+          }
           throw new Error(result.message);
         }
-
+        
         // clear input if signup success
         name.value = "";
         email.value = "";
