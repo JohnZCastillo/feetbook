@@ -59,6 +59,19 @@ if (isset($_POST['unblock'])) {
     }
 }
 
+// delete user
+if (isset($_POST['delete'])) {
+    try {
+        $id = $_POST['delete'];
+        UserDb::deleteUser($id);
+        header("location: ./admin");
+    } catch (Exception $e) {
+        // $_SESSION['errorBlock'] = "Unable to block user";
+        $_SESSION['errorBlock'] = $e->getMessage();
+        header("location: ./admin");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -173,6 +186,7 @@ if (isset($_POST['unblock'])) {
 
                     $block;
 
+
                     $action = "<button class=\"action\">Block</button><button class=\"action\">Delete</button>";
                     $data = array();
 
@@ -190,13 +204,19 @@ if (isset($_POST['unblock'])) {
                     </form>";
                     }
 
+                    $delete  = "<form method = \"POST\"  action=\"./admin\">
+                        <input name=\"delete\" value=\"$id\" class=\"hide\">
+                        <button class=\"action\">delete</button>
+                    </form>";
+
+
                     array_push($data,  $user->getFullname());
                     array_push($data,  $user->getEmail());
                     array_push($data,  $user->getMobile());
                     array_push($data,  $user->getAddress());
                     array_push($data,  $user->getCreated());
                     array_push($data,  $status == 1 ? "Active" : "Blocked");
-                    array_push($data,  $block);
+                    array_push($data,  $block . $delete);
                     array_push($users,  $data);
                 }
                 TableLayout::setLayout($header, $users, "history-table");

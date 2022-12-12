@@ -442,4 +442,33 @@ class UserDb
             throw new Exception("Update Failed ");
         }
     }
+
+    // delete user but must also delete its history
+    public static function deleteUser($id)
+    {
+
+        $connection = Database::open();
+
+        $statement[0] = "Delete from history where email = ?";
+        $statement[1] = "Delete from links where person_email = ?";
+        $statement[2] = "Delete from user where email = ?";
+        $statement[3] = "Delete from person where email = ?";
+
+
+        foreach ($statement as $query) {
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param(
+                "s",
+                $id
+            );
+
+            $stmt->execute();
+        }
+
+        $error = mysqli_error($connection);
+
+        Database::close($connection);
+
+        return $error;
+    }
 }
