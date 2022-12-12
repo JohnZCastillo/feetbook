@@ -165,7 +165,7 @@ class UserDb
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email where id = ?");
+        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email where id = ?");
 
 
         // set the ?'s mark data to parameter's data
@@ -216,7 +216,7 @@ class UserDb
         // open database connection
         $conn = Database::open();
 
-        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email");
+        $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email");
 
         // execute prepared statement
         $stmt->execute();
@@ -275,7 +275,7 @@ class UserDb
             // open database connecti/on
             $conn = Database::open();
 
-            $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM Person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email WHERE person.email = ?");
+            $stmt = $conn->prepare("SELECT person.fullname, person.email,person.mobile,person.address,person.job,person.area,person.created,facebook,youtube,website,password,status,profile,role FROM person INNER JOIN user us ON person.email = us.email INNER JOIN links li ON person.email = li.person_email WHERE person.email = ?");
 
             // set the ?'s mark data to parameter's data
             $stmt->bind_param("s", $email);

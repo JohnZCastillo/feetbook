@@ -14,7 +14,7 @@ class MainNav
         </div>
         <a href='./home' class='nav__link'>Home</a>
         <a href='./login' class='nav__link'>Login</a>
-        <a href='./signup' class='nav__link'>Singup</a>
+        <a href='./signup' class='nav__link'>Signup</a>
     </nav>";
     }
 }
